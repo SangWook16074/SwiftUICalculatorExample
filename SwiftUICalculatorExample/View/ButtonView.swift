@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ButtonView: View {
+    @ObservedObject var viewModel: CalculatorViewModel
+
     let grid: [[CalculatorKey]] = [
         [.function(.clear), .function(.sign), .function(.percent), .operation(.divide)],
         [.digit(7), .digit(8), .digit(9), .operation(.multiply)],
@@ -23,9 +25,8 @@ struct ButtonView: View {
                         ForEach(row) { key in
                             let width = buttonSize * CGFloat(key.columnSpan) + (spacing * CGFloat(key.columnSpan - 1))
                             
-                            CalculatorButton(key: key)
+                            CalculatorButton(key: key, action: viewModel.handleTap)
                                 .frame(width: width, height: buttonSize)
-                                .background(key.backgroundColor)
                                 .clipShape(RoundedRectangle(cornerRadius: 28))
                         }
                     }
@@ -33,4 +34,8 @@ struct ButtonView: View {
             }
         }
     }
+}
+
+#Preview {
+    ButtonView(viewModel: CalculatorViewModel())
 }

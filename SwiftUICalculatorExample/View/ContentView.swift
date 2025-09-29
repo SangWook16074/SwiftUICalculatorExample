@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = CalculatorViewModel()
+    
     private let spacing: CGFloat = 22
     private let buttonViewInternalSpacing: CGFloat = 12
 
@@ -22,9 +24,9 @@ struct ContentView: View {
                 
                 VStack {
                     
-                    DisplayValueView()
+                    DisplayValueView(viewModel: viewModel)
                     
-                    ButtonView()
+                    ButtonView(viewModel: viewModel)
                         .frame(height: buttonViewHeight)
                         
                 }
@@ -33,7 +35,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 #Preview {
     ContentView()

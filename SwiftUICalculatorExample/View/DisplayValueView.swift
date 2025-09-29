@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct DisplayValueView: View {
-    var value: String = "0"
+    @ObservedObject var viewModel: CalculatorViewModel
 
     var body: some View {
         VStack {
             Spacer()
             HStack {
                 Spacer()
-                Text(value)
+                Text(viewModel.displayValue)
                     .font(.system(size: 80, weight: .light))
                     .foregroundColor(.buttonForeground)
                     .lineLimit(1)
@@ -28,6 +28,8 @@ struct DisplayValueView: View {
 }
 
 #Preview {
-    DisplayValueView()
+    let viewModel = CalculatorViewModel()
+    viewModel.displayValue = "12345"
+    return DisplayValueView(viewModel: viewModel)
         .background(Color.globalBackground)
 }
